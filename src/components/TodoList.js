@@ -27,17 +27,21 @@ class TodoList extends Component {
     }
 
     createTodoList(e) {
-        axios.post(Constants.Backendpoint + "todoList/create", {
-            name: this._inputTodoListName.value
-        }, {headers: {"Authorization": Constants.AuthorizationToken}})
-            .then((response) => {
-                console.log(response);
-                this.getTodoLists();
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-        this._inputTodoListName.value = "";
+        if (this._inputTodoListName.value !== "") {
+            axios.post(Constants.Backendpoint + "todoList/create", {
+                name: this._inputTodoListName.value
+            }, {headers: {"Authorization": Constants.AuthorizationToken}})
+                .then((response) => {
+                    console.log(response);
+                    this.getTodoLists();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            this._inputTodoListName.value = "";
+        }
+        else
+            alert('Name cannot be empty');
         e.preventDefault();
     }
 
@@ -77,7 +81,6 @@ class TodoList extends Component {
     }
 
     getTodoItems(id) {
-        console.log("Getting todos " + id);
         axios
             .get(Constants.Backendpoint + "todoItems/" + id, {headers: {"Authorization": Constants.AuthorizationToken}})
             .then(response => {
@@ -131,6 +134,8 @@ class TodoList extends Component {
                 });
             this._inputName.value = this._inputDescription.value = this._inputDeadline.value = "";
         }
+        else
+            alert('Please fill the blanks');
         e.preventDefault();
     }
 
@@ -272,12 +277,10 @@ class TodoList extends Component {
         }
         else {
             return (
-                <Redirect to="
-                            /"/>
+                <Redirect to="/"/>
             )
         }
     }
-
 }
 
 export default TodoList;

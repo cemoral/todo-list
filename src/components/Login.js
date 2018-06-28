@@ -28,6 +28,7 @@ class Login extends Component {
             })
             .catch(function (error) {
                 console.log(error);
+                alert('Username or Password is incorrect')
             });
     }
 

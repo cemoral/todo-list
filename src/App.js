@@ -9,14 +9,11 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.Callback = this.Callback.bind(this);
-        //this.setState = this.setState.bind(this);
         this.state = {isAuthenticated: false};
-        console.log('cons');
     }
 
     Callback(param)
     {
-        console.log('updated');
         this.setState({isAuthenticated:param});
     }
 
